@@ -11,3 +11,4 @@ bin-release/
 # IntelliJ Idea
 .idea
 *.iml
+out*
