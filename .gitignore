@@ -7,3 +7,7 @@ bin-release/
 .flexProperties
 .settings/
 .project
+
+# IntelliJ Idea
+.idea
+*.iml
