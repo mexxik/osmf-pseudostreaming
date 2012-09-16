@@ -13,8 +13,8 @@
         import org.osmf.net.StreamingURLResource;
         import org.strym.osmf.plugins.pseudostreaming.PseudostreamingPluginInfo;
 
-        private static const VIDEO_URL:String = "http://pseudo01.hddn.com/vod/demo.flowplayervod/bbb-800.mp4";
 
+        private static const VIDEO_URL:String = "http://pseudo01.hddn.com/vod/demo.flowplayervod/bbb-800.mp4";
 
         private function creationCompleteHandler(event:FlexEvent):void {
             var factory:MediaFactory = new MediaFactory();

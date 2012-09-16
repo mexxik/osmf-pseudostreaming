@@ -7,6 +7,7 @@ Open Ssource Media Framework Pseudostreaming Plugin
 
 Here is the sample Flex application that uses Spark VideoPlayer and this plugin to play pseudostreamed media.
 
+```flex
 <?xml version="1.0"?>
 <s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
                xmlns:s="library://ns.adobe.com/flex/spark"
@@ -46,6 +47,7 @@ Here is the sample Flex application that uses Spark VideoPlayer and this plugin 
     <s:VideoPlayer id="videoPlayer"
                    width="100%" height="100%" />
 </s:Application>
+```
 
 ## The steps:
 1. Creating a media factory - we need a media factory that will create a special video elements for us.
