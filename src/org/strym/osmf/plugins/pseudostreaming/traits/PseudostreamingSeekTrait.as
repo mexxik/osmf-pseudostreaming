@@ -7,17 +7,16 @@ import org.osmf.traits.SeekTrait;
 import org.osmf.traits.TimeTrait;
 
 public class PseudostreamingSeekTrait extends SeekTrait {
-
-    protected var _loader:PseudostreamingNetLoader;
-    protected var _resource:URLResource;
+    protected var loader:PseudostreamingNetLoader;
+    protected var resource:URLResource;
     
     private var _offset:Number = 0;
 
     public function PseudostreamingSeekTrait(timeTrait:TimeTrait, loader:LoaderBase, resource:MediaResourceBase) {
         super(timeTrait);
 
-        _loader = loader as PseudostreamingNetLoader;
-        _resource = resource as URLResource;
+        this.loader = loader as PseudostreamingNetLoader;
+        this.resource = resource as URLResource;
     }
 
     override public function canSeekTo(time:Number):Boolean {
@@ -25,23 +24,22 @@ public class PseudostreamingSeekTrait extends SeekTrait {
     }
 
     override protected function seekingChangeStart(newSeeking:Boolean, time:Number):void {
-        // http://vodcdn.ec.own3d.tv/videos/SD/775000/775447_503bfa8b3bd85_HQ.mp4?7418afca70ba1dc09fb6b6e37c287072169117b285d7dfcce5f8de0e405f38daa970&ec_seek=1038.809&ec_rate=500&ec_prebuf=5
-
         if (newSeeking) {
-            if (time > (_loader.netStream.time + _loader.netStream.bufferLength + _offset) || time <  _loader.netStream.time) {
-                var query:String = _resource.getMetadataValue("pseudostreaming_query") as String;
+            if (time > (pseudostreamingTimeTrait.currentTime + loader.netStream.bufferLength) || time <  pseudostreamingTimeTrait.currentTime) {
+                var query:String = resource.getMetadataValue("pseudostreaming_query") as String;
                 if (query && query != "") {
-                    var url:String = _resource.url + query.replace("{time}", time.toString());
+                    var url:String = resource.url + query.replace("{time}", time.toString());
 
-                    _loader.netStream.play(url);
-                    //_loader.netStream.play(_resource.url + "&ec_prebuf=5&ec_rate=350&" + "ec_seek=" + time);
+                    loader.netStream.play(url);
                 }
 
             }
             else
-                _loader.netStream.seek(time);
+                loader.netStream.seek(time);
 
-            _offset = time;
+            //_offset = time;
+
+            pseudostreamingTimeTrait.positionOffset = time;
         }
     }
     
@@ -50,6 +48,10 @@ public class PseudostreamingSeekTrait extends SeekTrait {
 
         if (seeking)
             setSeeking(false, time);
+    }
+
+    protected function get pseudostreamingTimeTrait():PseudostreamingTimeTrait {
+        return timeTrait as PseudostreamingTimeTrait;
     }
 }
 }

@@ -7,7 +7,7 @@ import org.osmf.net.NetConnectionFactory;
 
 public class PseudostreamingFactoryItem extends MediaFactoryItem {
     public function PseudostreamingFactoryItem() {
-        super(  "tv.own3d.player.org.strym.osmf.plugins.pseudostreaming.PseudostreamingFactoryItem",
+        super(  "org.strym.osmf.plugins.pseudostreaming.PseudostreamingFactoryItem",
                 canHandleResource,
                 createMediaElement);
     }
@@ -15,7 +15,7 @@ public class PseudostreamingFactoryItem extends MediaFactoryItem {
     private function canHandleResource(resource:MediaResourceBase):Boolean {
         var urlResource:URLResource = resource as URLResource;
 
-        return urlResource.url.indexOf("http://vodcdn.ec.own3d.tv") == 0;
+        return urlResource.url.indexOf("http://") == 0;
     }
 
     private function createMediaElement():MediaElement {
