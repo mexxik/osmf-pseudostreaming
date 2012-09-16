@@ -1,7 +1,7 @@
 osmf-pseudostreaming
 ====================
 
-Open Ssource Media Framework Pseudostreaming Plugin
+Open Source Media Framework Pseudostreaming Plugin
 
 #Quickstart
 
