@@ -1,7 +1,32 @@
 <?xml version="1.0"?>
-<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns:s="library://ns.adobe.com/flex/spark">
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+               xmlns:s="library://ns.adobe.com/flex/spark"
+               creationComplete="creationCompleteHandler(event)" >
+
     <fx:Script><![CDATA[
-        import mx.controls.Alert;
+        import mx.events.FlexEvent;
+
+        import org.osmf.media.MediaFactory;
+
+        import org.osmf.media.MediaResourceBase;
+        import org.osmf.media.PluginInfoResource;
+        import org.osmf.net.StreamingURLResource;
+        import org.strym.osmf.plugins.pseudostreaming.PseudostreamingPluginInfo;
+
+        private static const VIDEO_URL:String = "http://pseudo01.hddn.com/vod/demo.flowplayervod/bbb-800.mp4";
+
+
+        private function creationCompleteHandler(event:FlexEvent):void {
+            var factory:MediaFactory = new MediaFactory();
+            factory.loadPlugin(new PluginInfoResource(new PseudostreamingPluginInfo()));
+
+            var resource:MediaResourceBase = new StreamingURLResource(VIDEO_URL);
+            resource.addMetadataValue("pseudostreaming_query", "?start={time}");
+
+            videoPlayer.source = factory.createMediaElement(resource);
+        }
         ]]></fx:Script>
-    <s:Button click="Alert.show('Hello, world')" label="Say Hello"/>
+
+    <s:VideoPlayer id="videoPlayer"
+                   width="100%" height="100%" />
 </s:Application>

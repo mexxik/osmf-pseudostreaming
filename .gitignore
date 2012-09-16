@@ -1,7 +1,6 @@
 # Build and Release Folders
 bin-debug/
 bin-release/
-flex-test
 
 # Project property files
 .actionScriptProperties
