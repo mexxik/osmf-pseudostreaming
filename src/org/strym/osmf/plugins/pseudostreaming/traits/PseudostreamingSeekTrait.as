@@ -25,7 +25,7 @@ public class PseudostreamingSeekTrait extends SeekTrait {
 
     override protected function seekingChangeStart(newSeeking:Boolean, time:Number):void {
         if (newSeeking) {
-            if (time > (pseudostreamingTimeTrait.currentTime + loader.netStream.bufferLength) || time <  pseudostreamingTimeTrait.currentTime) {
+            if (time > (timeTrait.duration * Number(loader.netStream.bytesLoaded / loader.netStream.bytesTotal)) || time <  pseudostreamingTimeTrait.currentTime) {
                 var query:String = resource.getMetadataValue("pseudostreaming_query") as String;
                 if (query && query != "") {
                     var url:String = resource.url + query.replace("{time}", time.toString());
@@ -33,13 +33,14 @@ public class PseudostreamingSeekTrait extends SeekTrait {
                     loader.netStream.play(url);
                 }
 
+                pseudostreamingTimeTrait.positionOffset = time;
             }
             else
                 loader.netStream.seek(time);
 
             //_offset = time;
 
-            pseudostreamingTimeTrait.positionOffset = time;
+
         }
     }
     
