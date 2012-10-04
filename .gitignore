@@ -12,3 +12,5 @@ bin-release/
 .idea
 *.iml
 out*
+
+flex-test/

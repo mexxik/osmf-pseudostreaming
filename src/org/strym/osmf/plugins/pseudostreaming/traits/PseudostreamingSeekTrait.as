@@ -10,8 +10,6 @@ public class PseudostreamingSeekTrait extends SeekTrait {
     protected var loader:PseudostreamingNetLoader;
     protected var resource:URLResource;
     
-    private var _offset:Number = 0;
-
     public function PseudostreamingSeekTrait(timeTrait:TimeTrait, loader:LoaderBase, resource:MediaResourceBase) {
         super(timeTrait);
 
@@ -36,10 +34,7 @@ public class PseudostreamingSeekTrait extends SeekTrait {
                 pseudostreamingTimeTrait.positionOffset = time;
             }
             else
-                loader.netStream.seek(time);
-
-            //_offset = time;
-
+                loader.netStream.seek(time - pseudostreamingTimeTrait.positionOffset);
 
         }
     }

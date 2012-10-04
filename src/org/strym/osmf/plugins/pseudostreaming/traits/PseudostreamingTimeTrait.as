@@ -118,5 +118,9 @@ public class PseudostreamingTimeTrait extends TimeTrait {
     public function set positionOffset(value:Number):void {
         _positionOffset = value;
     }
+
+    public function get positionOffset():Number {
+        return _positionOffset;
+    }
 }
 }

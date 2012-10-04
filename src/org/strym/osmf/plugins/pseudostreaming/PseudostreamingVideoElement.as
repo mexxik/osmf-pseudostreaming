@@ -2,6 +2,7 @@ package org.strym.osmf.plugins.pseudostreaming {
 import org.osmf.elements.VideoElement;
 import org.osmf.media.MediaResourceBase;
 import org.osmf.net.NetLoader;
+import org.osmf.net.NetStreamLoadTrait;
 import org.osmf.traits.MediaTraitBase;
 import org.osmf.traits.MediaTraitType;
 import org.osmf.traits.TimeTrait;
@@ -21,7 +22,7 @@ public class PseudostreamingVideoElement extends VideoElement {
         var trait:MediaTraitBase = instance;
 
         if (type == MediaTraitType.LOAD) {
-            //trait = new PseudostreamingLoadTrait(loader, resource);
+            //trait = new NetStreamLoadTrait(loader, resource);
         }
         if (type == MediaTraitType.TIME) {
             trait = new PseudostreamingTimeTrait((loader as PseudostreamingNetLoader).netStream, resource);
@@ -40,5 +41,7 @@ public class PseudostreamingVideoElement extends VideoElement {
 
         super.addTrait(type, trait);
     }
+
+
 }
 }

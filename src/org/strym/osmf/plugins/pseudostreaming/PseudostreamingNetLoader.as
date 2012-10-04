@@ -22,5 +22,9 @@ public class PseudostreamingNetLoader extends NetLoader {
     public function get netStream():NetStream {
         return _netStream;
     }
+
+
+
+
 }
 }
