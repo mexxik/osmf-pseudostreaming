@@ -23,7 +23,9 @@ public class PseudostreamingSeekTrait extends SeekTrait {
 
     override protected function seekingChangeStart(newSeeking:Boolean, time:Number):void {
         if (newSeeking) {
-            if (time > (timeTrait.duration * Number(loader.netStream.bytesLoaded / loader.netStream.bytesTotal)) || time <  pseudostreamingTimeTrait.currentTime) {
+            var maxBufferedTime:Number = pseudostreamingTimeTrait.positionOffset + timeTrait.duration * Number(loader.netStream.bytesLoaded / loader.netStream.bytesTotal);
+
+            if (time > maxBufferedTime || time <  pseudostreamingTimeTrait.currentTime) {
                 var query:String = resource.getMetadataValue("pseudostreaming_query") as String;
                 if (query && query != "") {
                     var url:String = resource.url + query.replace("{time}", time.toString());
