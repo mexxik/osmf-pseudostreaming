@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="wet-boew-multimedia-fallback" default="default" basedir=".">
+	<description>Multimedia Player Flash Fallback</description>
+
+	<property file="build.properties"/>
+	<import file="build-tasks.xml"/>
+
+	<target name="default" depends="clean,build" description="Performs a Clean and Build when calling ant without any target"></target>
+
+	<target name="build" description="" depends="-init, -build-flex" />
+
+	<target name="-init" depends="-check-flex-sdk">
+		<mkdir dir="${bin.release.dir}"/>
+	</target>
+	
+	<target name="-build-flex">
+		<compc output="${bin.release.dir}/osmf-pseudostreaming.swc">
+			<load-config filename="${FLEX_HOME}/frameworks/air-config.xml"/>
+			<source-path path-element="${src.dir}"/>
+			<include-sources dir="${src.dir}" includes="*"/>
+		</compc>
+	</target>
+
+	<target name="clean">
+		<delete dir="${dist.dir}" />
+	</target>
+</project>

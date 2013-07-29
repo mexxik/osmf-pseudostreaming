@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="build-tasks" default="default" basedir=".">
+	<property environment="env" />
+	<property name="flextasks.jar" value="${env.FLEX_HOME}/ant/lib/flexTasks.jar" />
+	
+	<!-- flex task definition  -->	
+	<path id="flextasks.classpath">
+		<pathelement location="${flextasks.jar}" />
+	</path> 
+	<taskdef resource="flexTasks.tasks">
+		<classpath refid="flextasks.classpath" />
+	</taskdef>
+	
+	<target name="-check-flex-sdk">
+		<sequential>
+			<condition property="flex.home.exist">
+				<isset property="env.FLEX_HOME" />
+			</condition>
+			<fail unless="flex.home.exist" message="FLEX_HOME environment variable not set"/>
+			<property name="FLEX_HOME" value="${env.FLEX_HOME}" />
+			<condition property="flextasks.jar.exist">
+				<available file="${flextasks.jar}" />
+			</condition>
+			<fail unless="flextasks.jar.exist" message="Missing flexTasks.jar in FlexSDK (${flextasks.jar})"/>
+		</sequential>
+	</target>
+</project>
